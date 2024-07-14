@@ -17,7 +17,6 @@ struct DOWSetGameModel{
     
     init() {
         cardsOnTable = []
-        theDeck = []
         let deckBuilder = TheDeckBuilder()
         theDeck = deckBuilder.makeDeck()
         theDeck.shuffle()
@@ -41,7 +40,7 @@ struct DOWSetGameModel{
                             firstSelectedCard = nil
                             secondSelectedCard = nil
                             addThreeCards()
-                        } else  {
+                        } else {
                             print("Not set!")
                             cardsOnTable[firstPotentialMatchIndex].selected = false
                             cardsOnTable[secondPotentialMatchIndex].selected = false
@@ -49,31 +48,18 @@ struct DOWSetGameModel{
                             firstSelectedCard = chosenIndex
                             secondSelectedCard = nil
                         }
-                    }
-                    else{
+                    } else {
                         secondSelectedCard = chosenIndex
                     }
-                }
-                else {
-                    
+                } else {
                     firstSelectedCard = chosenIndex
                 }
-                cardsOnTable[chosenIndex].selected.toggle()
+                cardsOnTable[chosenIndex].selected = true
             } else {
-                cardsOnTable[chosenIndex].selected.toggle()
+                cardsOnTable[chosenIndex].selected = false
             }
         }
     }
-    
-    mutating func removeMatchedCards(){
-       for i in 0..<cardsOnTable.count{
-           if cardsOnTable[i].isMatched{
-               cardsOnTable.remove(at: i)
-           }
-       }
-   }
-    
-//
     
 // проверка set
     
@@ -132,10 +118,10 @@ struct DOWSetGameModel{
 // добавление трёх карт на поле
     
     mutating func addThreeCards(){
-        if theDeck.count >= 3 {
-            for i in 0...2{
-                cardsOnTable.append(theDeck[i])
-                theDeck.remove(at: i)
+        if theDeck.count != 0{
+            for _ in 1...3{
+                cardsOnTable.append(theDeck[0])
+                theDeck.remove(at: 0)
             }
         }
     }
@@ -152,6 +138,5 @@ struct DOWSetGameModel{
         
         var id: Int
     }
-    
 }
 

@@ -11,4 +11,6 @@ enum Filling{
     case paintedOver
     case translucent
     case empty
+    
+    static let allValues: [Filling] = [.empty, .paintedOver, .translucent]
 }
