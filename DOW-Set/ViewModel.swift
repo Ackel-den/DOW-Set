@@ -41,4 +41,7 @@ class ViewModel: ObservableObject{
     func restart(){
         model = ViewModel.createNewSetGame()
     }
+    func changeFaceUp(_ card: Card){
+        model.faceUpCard(card)
+    }
 }

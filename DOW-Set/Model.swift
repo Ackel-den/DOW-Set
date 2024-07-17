@@ -61,6 +61,14 @@ struct DOWSetGameModel{
             }
         }
     
+    // раскрытие карт после выдачи
+    mutating func faceUpCard(_ card: Card){
+        if let index = cardsOnTable.firstIndex(where: {$0.id == card.id}){
+            cardsOnTable[index].startFaceUp = true
+        }
+        
+    }
+    
     // добавление трёх карт на поле
         
     mutating func addThreeCards(){
@@ -68,9 +76,6 @@ struct DOWSetGameModel{
                 for _ in 1...3{
                     cardsOnTable.append(theDeck[0])
                     theDeck.remove(at: 0)
-                }
-                for i in 0..<cardsOnTable.count{
-                    cardsOnTable[i].startFaceUp = true
                 }
             }
         }

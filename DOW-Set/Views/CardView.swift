@@ -31,6 +31,7 @@ struct CardView: View  {
                     .foregroundColor(.red)
             }
         }
+        .animation(Animation.easeInOut(duration: 1))
     }
     
     

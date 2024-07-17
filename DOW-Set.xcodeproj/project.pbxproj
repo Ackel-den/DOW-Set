@@ -22,6 +22,7 @@
 		1660EEB42C3EA48F001FE105 /* TheDeckBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660EE9F2C3EA48F001FE105 /* TheDeckBuilder.swift */; };
 		1660EEB52C3EA48F001FE105 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660EEA02C3EA48F001FE105 /* ViewModel.swift */; };
 		1660EEB92C43C365001FE105 /* EnumOfContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660EEB82C43C365001FE105 /* EnumOfContent.swift */; };
+		1660EEBB2C481057001FE105 /* CardifyAnimatableMod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660EEBA2C481057001FE105 /* CardifyAnimatableMod.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		1660EE9F2C3EA48F001FE105 /* TheDeckBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheDeckBuilder.swift; sourceTree = "<group>"; };
 		1660EEA02C3EA48F001FE105 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1660EEB82C43C365001FE105 /* EnumOfContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumOfContent.swift; sourceTree = "<group>"; };
+		1660EEBA2C481057001FE105 /* CardifyAnimatableMod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardifyAnimatableMod.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		1660EE9A2C3EA48F001FE105 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1660EEBA2C481057001FE105 /* CardifyAnimatableMod.swift */,
 				1660EE972C3EA48F001FE105 /* AspectVGrid.swift */,
 				1660EE982C3EA48F001FE105 /* CardView.swift */,
 			);
@@ -197,6 +200,7 @@
 				1660EEA92C3EA48F001FE105 /* Diamonds.swift in Sources */,
 				1660EEB42C3EA48F001FE105 /* TheDeckBuilder.swift in Sources */,
 				1660EEA62C3EA48F001FE105 /* EnumOfFillings.swift in Sources */,
+				1660EEBB2C481057001FE105 /* CardifyAnimatableMod.swift in Sources */,
 				1660EEB32C3EA48F001FE105 /* Model.swift in Sources */,
 				1660EEAD2C3EA48F001FE105 /* AspectVGrid.swift in Sources */,
 				1660EEB52C3EA48F001FE105 /* ViewModel.swift in Sources */,
