@@ -13,17 +13,22 @@ struct CardView: View  {
     
     var body: some View {
         let rectangle = RoundedRectangle(cornerRadius: 25.0)
-            .stroke(lineWidth: 5)
-            .fill()
         ZStack{
-            if !content.isMatched{
-                if content.selected{
-                    rectangle.foregroundColor(.yellow)
-                } else {
-                    rectangle.foregroundColor(.black)
+            if content.startFaceUp{
+                if !content.isMatched {
+                    if content.selected{
+                        rectangle.strokeBorder(lineWidth: 5)
+                            .foregroundColor(.yellow)
+                    } else {
+                        rectangle.strokeBorder(lineWidth: 5)
+                            .foregroundColor(.black)
+                    }
+                    cardContent().aspectRatio(1/2, contentMode: .fit)
+                        .padding(.all)
                 }
-                cardContent().aspectRatio(1/2, contentMode: .fit)
-                    .padding(.all)
+            } else {
+                rectangle
+                    .foregroundColor(.red)
             }
         }
     }
@@ -62,7 +67,3 @@ struct CardView: View  {
         }
     }
 }
-
-//#Preview {
-//    CardView()
-//}

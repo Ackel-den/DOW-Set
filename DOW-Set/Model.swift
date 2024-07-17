@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct DOWSetGameModel{
-    
+    var gameStart = false
     var theDeck: [Card]
     var cardsOnTable: [Card]
     var firstSelectedCard: Int?
@@ -28,40 +28,64 @@ struct DOWSetGameModel{
 
     
     mutating func choose(_ card: Card){
-        if let chosenIndex = cardsOnTable.firstIndex(where: {$0.id == card.id}){
-            if !cardsOnTable[chosenIndex].selected{
-                if let firstPotentialMatchIndex = firstSelectedCard{
-                    if let secondPotentialMatchIndex = secondSelectedCard{
-                        if checkSet(firstPotentialMatchIndex, secondPotentialMatchIndex, chosenIndex){
-                            print("set!")
-                            cardsOnTable[firstPotentialMatchIndex].isMatched = true
-                            cardsOnTable[secondPotentialMatchIndex].isMatched = true
-                            cardsOnTable[chosenIndex].isMatched = true
-                            firstSelectedCard = nil
-                            secondSelectedCard = nil
-                            addThreeCards()
+            if let chosenIndex = cardsOnTable.firstIndex(where: {$0.id == card.id}){
+                if !cardsOnTable[chosenIndex].selected{
+                    if let firstPotentialMatchIndex = firstSelectedCard{
+                        if let secondPotentialMatchIndex = secondSelectedCard{
+                            if checkSet(firstPotentialMatchIndex, secondPotentialMatchIndex, chosenIndex){
+                                print("set!")
+                                cardsOnTable[firstPotentialMatchIndex].isMatched = true
+                                cardsOnTable[secondPotentialMatchIndex].isMatched = true
+                                cardsOnTable[chosenIndex].isMatched = true
+                                firstSelectedCard = nil
+                                secondSelectedCard = nil
+                                addThreeCards()
+                            } else {
+                                print("Not set!")
+                                cardsOnTable[firstPotentialMatchIndex].selected = false
+                                cardsOnTable[secondPotentialMatchIndex].selected = false
+                                cardsOnTable[chosenIndex].selected = false
+                                firstSelectedCard = chosenIndex
+                                secondSelectedCard = nil
+                            }
                         } else {
-                            print("Not set!")
-                            cardsOnTable[firstPotentialMatchIndex].selected = false
-                            cardsOnTable[secondPotentialMatchIndex].selected = false
-                            cardsOnTable[chosenIndex].selected = false
-                            firstSelectedCard = chosenIndex
-                            secondSelectedCard = nil
+                            secondSelectedCard = chosenIndex
                         }
                     } else {
-                        secondSelectedCard = chosenIndex
+                        firstSelectedCard = chosenIndex
                     }
+                    cardsOnTable[chosenIndex].selected = true
                 } else {
-                    firstSelectedCard = chosenIndex
+                    cardsOnTable[chosenIndex].selected = false
                 }
-                cardsOnTable[chosenIndex].selected = true
-            } else {
-                cardsOnTable[chosenIndex].selected = false
+            }
+        }
+    
+    // добавление трёх карт на поле
+        
+    mutating func addThreeCards(){
+            if theDeck.count != 0{
+                for _ in 1...3{
+                    cardsOnTable.append(theDeck[0])
+                    theDeck.remove(at: 0)
+                }
+                for i in 0..<cardsOnTable.count{
+                    cardsOnTable[i].startFaceUp = true
+                }
+            }
+        }
+    // изменение переменной gameStart
+    
+    mutating func changeStartGame(){
+        gameStart.toggle()
+        if gameStart {
+            for i in 0..<cardsOnTable.count{
+                cardsOnTable[i].startFaceUp = true
             }
         }
     }
     
-// проверка set
+    // проверка set
     
     private func checkSet(_ first: Int, _ second: Int, _ third: Int) -> Bool {
         if (checkColor()&&checkShapes()&&checkFilling()&&checkNumbers()){
@@ -115,18 +139,9 @@ struct DOWSetGameModel{
         }
     }
   
-// добавление трёх карт на поле
+
     
-    mutating func addThreeCards(){
-        if theDeck.count != 0{
-            for _ in 1...3{
-                cardsOnTable.append(theDeck[0])
-                theDeck.remove(at: 0)
-            }
-        }
-    }
-    
-//  структура карты
+    //  структура карты
 
     struct Card: Identifiable{
         let content: Shapes
@@ -135,6 +150,7 @@ struct DOWSetGameModel{
         let filling: Filling
         var selected = false
         var isMatched = false
+        var startFaceUp = false
         
         var id: Int
     }

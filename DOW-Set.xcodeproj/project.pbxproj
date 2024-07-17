@@ -13,10 +13,8 @@
 		1660EEA92C3EA48F001FE105 /* Diamonds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660EE922C3EA48F001FE105 /* Diamonds.swift */; };
 		1660EEAA2C3EA48F001FE105 /* Oval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660EE932C3EA48F001FE105 /* Oval.swift */; };
 		1660EEAB2C3EA48F001FE105 /* Waves.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660EE942C3EA48F001FE105 /* Waves.swift */; };
-		1660EEAC2C3EA48F001FE105 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660EE962C3EA48F001FE105 /* AddButton.swift */; };
 		1660EEAD2C3EA48F001FE105 /* AspectVGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660EE972C3EA48F001FE105 /* AspectVGrid.swift */; };
 		1660EEAE2C3EA48F001FE105 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660EE982C3EA48F001FE105 /* CardView.swift */; };
-		1660EEAF2C3EA48F001FE105 /* TheDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660EE992C3EA48F001FE105 /* TheDeck.swift */; };
 		1660EEB02C3EA48F001FE105 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1660EE9B2C3EA48F001FE105 /* Assets.xcassets */; };
 		1660EEB12C3EA48F001FE105 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660EE9C2C3EA48F001FE105 /* ContentView.swift */; };
 		1660EEB22C3EA48F001FE105 /* DOW_SetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660EE9D2C3EA48F001FE105 /* DOW_SetApp.swift */; };
@@ -34,10 +32,8 @@
 		1660EE922C3EA48F001FE105 /* Diamonds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diamonds.swift; sourceTree = "<group>"; };
 		1660EE932C3EA48F001FE105 /* Oval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Oval.swift; sourceTree = "<group>"; };
 		1660EE942C3EA48F001FE105 /* Waves.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Waves.swift; sourceTree = "<group>"; };
-		1660EE962C3EA48F001FE105 /* AddButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		1660EE972C3EA48F001FE105 /* AspectVGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AspectVGrid.swift; sourceTree = "<group>"; };
 		1660EE982C3EA48F001FE105 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		1660EE992C3EA48F001FE105 /* TheDeck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheDeck.swift; sourceTree = "<group>"; };
 		1660EE9B2C3EA48F001FE105 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1660EE9C2C3EA48F001FE105 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1660EE9D2C3EA48F001FE105 /* DOW_SetApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DOW_SetApp.swift; sourceTree = "<group>"; };
@@ -105,10 +101,8 @@
 		1660EE9A2C3EA48F001FE105 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1660EE962C3EA48F001FE105 /* AddButton.swift */,
 				1660EE972C3EA48F001FE105 /* AspectVGrid.swift */,
 				1660EE982C3EA48F001FE105 /* CardView.swift */,
-				1660EE992C3EA48F001FE105 /* TheDeck.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -202,14 +196,12 @@
 			files = (
 				1660EEA92C3EA48F001FE105 /* Diamonds.swift in Sources */,
 				1660EEB42C3EA48F001FE105 /* TheDeckBuilder.swift in Sources */,
-				1660EEAF2C3EA48F001FE105 /* TheDeck.swift in Sources */,
 				1660EEA62C3EA48F001FE105 /* EnumOfFillings.swift in Sources */,
 				1660EEB32C3EA48F001FE105 /* Model.swift in Sources */,
 				1660EEAD2C3EA48F001FE105 /* AspectVGrid.swift in Sources */,
 				1660EEB52C3EA48F001FE105 /* ViewModel.swift in Sources */,
 				1660EEB22C3EA48F001FE105 /* DOW_SetApp.swift in Sources */,
 				1660EEA72C3EA48F001FE105 /* EnumOfShape.swift in Sources */,
-				1660EEAC2C3EA48F001FE105 /* AddButton.swift in Sources */,
 				1660EEB12C3EA48F001FE105 /* ContentView.swift in Sources */,
 				1660EEAB2C3EA48F001FE105 /* Waves.swift in Sources */,
 				1660EEAE2C3EA48F001FE105 /* CardView.swift in Sources */,

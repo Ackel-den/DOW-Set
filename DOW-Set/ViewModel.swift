@@ -8,23 +8,37 @@
 import SwiftUI
 
 class ViewModel: ObservableObject{
-    @Published private var model = DOWSetGameModel()
+    typealias Card = DOWSetGameModel.Card
+    
+    @Published private (set) var model = createNewSetGame()
+    
+    static func createNewSetGame() -> DOWSetGameModel{
+        DOWSetGameModel()
+    }
+    
+    var cardsOnTable: Array<DOWSetGameModel.Card>{
+        model.cardsOnTable
+    }
+    
+    var gameStart: Bool{
+        return model.gameStart
+    }
     
     var theDeck: Array<DOWSetGameModel.Card>{
         return model.theDeck
     }
-    
-    var cardOnTable: Array<DOWSetGameModel.Card>
-    {
-        return model.cardsOnTable
-    }
+
     
     func add(){
         model.addThreeCards()
     }
-    
+    func gameStarted(){
+        model.changeStartGame()
+    }
     func choose(card: DOWSetGameModel.Card){
         model.choose(card)
     }
-
+    func restart(){
+        model = ViewModel.createNewSetGame()
+    }
 }
