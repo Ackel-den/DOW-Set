@@ -12,59 +12,59 @@ struct CardView: View  {
     let content: DOWSetGameModel.Card
     
     var body: some View {
-        let rectangle = RoundedRectangle(cornerRadius: 25.0)
-        ZStack{
-            if content.startFaceUp{
-                if !content.isMatched {
-                    if content.selected{
-                        rectangle.strokeBorder(lineWidth: 5)
-                            .foregroundColor(.yellow)
-                    } else {
-                        rectangle.strokeBorder(lineWidth: 5)
-                            .foregroundColor(.black)
-                    }
-                    cardContent().aspectRatio(1/2, contentMode: .fit)
+        GeometryReader{ geometry in            
+            ZStack{
+                cardContent(content).aspectRatio(1/2, contentMode: .fit)
                         .padding(.all)
-                }
-            } else {
-                rectangle
-                    .foregroundColor(.red)
             }
-        }
-        .animation(Animation.easeInOut(duration: 1))
-    }
-    
-    
-    @ViewBuilder
-    private func cardContent() -> some View{
-        VStack{
-            ForEach(0..<content.numberOfShapes){num in
-                if content.content == Shapes.diamond{
-                    if content.filling == Filling.empty{
-                        Diamonds().stroke(lineWidth: 2).foregroundColor(content.color)
-                    } else if content.filling == Filling.paintedOver{
-                        Diamonds().foregroundColor(content.color)
-                    } else {
-                        Diamonds().foregroundColor(content.color).opacity(0.3)
-                    }
-                } else if content.content == Shapes.oval {
-                    if content.filling == Filling.empty{
-                        Oval().stroke(lineWidth: 2).foregroundColor(content.color)
-                    } else if content.filling == Filling.paintedOver{
-                        Oval().foregroundColor(content.color)
-                    } else {
-                        Oval().foregroundColor(content.color).opacity(0.3)
-                    }
-                } else {
-                    if content.filling == Filling.empty{
-                        Waves().stroke(lineWidth: 2).foregroundColor(content.color)
-                    } else if content.filling == Filling.paintedOver{
-                        Waves().foregroundColor(content.color)
-                    } else {
-                        Waves().foregroundColor(content.color).opacity(0.3)
-                    }
-                }
-            }
+            .cardify(startFaceUp: content.startFaceUp, selected: content.selected, isMatched: content.isMatched)
         }
     }
 }
+    
+    @ViewBuilder
+    private func cardContent(_ content: DOWSetGameModel.Card) -> some View{
+        let shape = chooseShape(content.content)
+        let numbers = content.numberOfShapes
+        VStack{
+            ForEach(1...numbers, id: \.self){_ in
+                switch content.filling{
+                case .empty:
+                    AnyView(shape.stroke(lineWidth: 2).foregroundColor(content.color))
+                case .paintedOver:
+                    AnyView(shape.foregroundColor(content.color))
+                case .translucent:
+                    AnyView(shape.foregroundColor(content.color).opacity(0.2))
+                }
+            }
+        }
+    }
+    
+    private func chooseShape(_ shapes: Shapes) -> any Shape{
+        switch shapes{
+        case .diamond:
+            return Diamonds()
+        case .oval:
+            return Oval()
+        case .waves:
+            return Waves()
+        }
+    }
+
+    
+//if content.startFaceUp{
+//if !content.isMatched {
+//    if content.selected{
+//        rectangle.strokeBorder(lineWidth: 5)
+//            .foregroundColor(.yellow)
+//    } else {
+//        rectangle.strokeBorder(lineWidth: 5)
+//            .foregroundColor(.black)
+//    }
+//        cardContent(content).aspectRatio(1/2, contentMode: .fit)
+//            .padding(.all)
+//}
+//} else {
+//rectangle
+//    .foregroundColor(.red)
+//}

@@ -7,10 +7,8 @@
 
 import Foundation
 
-enum Shapes{
+enum Shapes: CaseIterable{
     case diamond
     case oval
     case waves
-    
-    static let allValue: [Shapes] = [.diamond, .oval, .waves]
-}
+    }

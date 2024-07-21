@@ -14,6 +14,7 @@ struct DOWSetGameModel{
     var cardsOnTable: [Card]
     var firstSelectedCard: Int?
     var secondSelectedCard: Int?
+    var endGame: Bool
     
     init() {
         cardsOnTable = []
@@ -24,42 +25,52 @@ struct DOWSetGameModel{
             cardsOnTable.append(theDeck[i])
             theDeck.remove(at: i)
         }
+        endGame = false
     }
-
     
     mutating func choose(_ card: Card){
-            if let chosenIndex = cardsOnTable.firstIndex(where: {$0.id == card.id}){
-                if !cardsOnTable[chosenIndex].selected{
-                    if let firstPotentialMatchIndex = firstSelectedCard{
-                        if let secondPotentialMatchIndex = secondSelectedCard{
-                            if checkSet(firstPotentialMatchIndex, secondPotentialMatchIndex, chosenIndex){
-                                print("set!")
-                                cardsOnTable[firstPotentialMatchIndex].isMatched = true
-                                cardsOnTable[secondPotentialMatchIndex].isMatched = true
-                                cardsOnTable[chosenIndex].isMatched = true
-                                firstSelectedCard = nil
-                                secondSelectedCard = nil
-                                addThreeCards()
-                            } else {
-                                print("Not set!")
-                                cardsOnTable[firstPotentialMatchIndex].selected = false
-                                cardsOnTable[secondPotentialMatchIndex].selected = false
-                                cardsOnTable[chosenIndex].selected = false
-                                firstSelectedCard = chosenIndex
-                                secondSelectedCard = nil
-                            }
+        if let chosenIndex = cardsOnTable.firstIndex(where: {$0.id == card.id}){
+            guard cardsOnTable[chosenIndex].selected else {
+                if let firstPotentionalIndex = firstSelectedCard{
+                    if let secondPotentionalIndex = secondSelectedCard{
+                        if checkSet(firstPotentionalIndex, secondPotentionalIndex, chosenIndex){
+                            cardsOnTable[firstPotentionalIndex].isMatched = true
+                            cardsOnTable[secondPotentionalIndex].isMatched = true
+                            cardsOnTable[chosenIndex].isMatched = true
+                            firstSelectedCard = nil
+                            secondSelectedCard = nil
+                            deleteMatchedCards()
                         } else {
-                            secondSelectedCard = chosenIndex
+                            print("Not set!")
+                            for i in 0..<cardsOnTable.count{
+                                cardsOnTable[i].selected = false
+                            }
+                            secondSelectedCard = nil
+                            firstSelectedCard = chosenIndex
+                            cardsOnTable[chosenIndex].selected = true
                         }
-                    } else {
-                        firstSelectedCard = chosenIndex
                     }
-                    cardsOnTable[chosenIndex].selected = true
+                    else{
+                        secondSelectedCard = selectedCard(chosenIndex)
+                    }
                 } else {
-                    cardsOnTable[chosenIndex].selected = false
+                    firstSelectedCard = selectedCard(chosenIndex)
                 }
+                return
+            }
+            cardsOnTable[chosenIndex].selected = false
+            if firstSelectedCard == chosenIndex {
+                firstSelectedCard = nil
+            } else if secondSelectedCard == chosenIndex {
+                secondSelectedCard = nil
             }
         }
+        
+        func selectedCard(_ selectedCardIndex: Int) -> Int{
+            cardsOnTable[selectedCardIndex].selected = true
+            return selectedCardIndex
+        }
+    }
     
     // раскрытие карт после выдачи
     mutating func faceUpCard(_ card: Card){
@@ -68,6 +79,19 @@ struct DOWSetGameModel{
         }
         
     }
+    
+//    //проверка на оставшиеся сеты
+//    private mutating func checkEndGame(){
+//        if theDeck.count == 0{
+//            for i in 0..<cardsOnTable.count{
+//                if i != cardsOnTable.endIndex{
+//                    if checkSet(i, (i+1), (i+2)) == true{
+//                        
+//                    }
+//                } else { }
+//            }
+//        }
+//    }
     
     // добавление трёх карт на поле
         
@@ -90,12 +114,24 @@ struct DOWSetGameModel{
         }
     }
     
+    // удаление совпавших карт из массива
+    
+    private mutating func deleteMatchedCards(){
+        if cardsOnTable.count != 0{
+            for _ in 0..<cardsOnTable.count{
+                if let index = cardsOnTable.firstIndex(where: {$0.isMatched == true}){
+                    cardsOnTable.remove(at: index)
+                }
+            }
+        }
+    }
+    
     // проверка set
     
     private func checkSet(_ first: Int, _ second: Int, _ third: Int) -> Bool {
         if (checkColor()&&checkShapes()&&checkFilling()&&checkNumbers()){
             return true
-        }else{
+        } else {
             return false
         }
         

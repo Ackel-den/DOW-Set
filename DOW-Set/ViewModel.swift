@@ -10,11 +10,7 @@ import SwiftUI
 class ViewModel: ObservableObject{
     typealias Card = DOWSetGameModel.Card
     
-    @Published private (set) var model = createNewSetGame()
-    
-    static func createNewSetGame() -> DOWSetGameModel{
-        DOWSetGameModel()
-    }
+    @Published private (set) var model = DOWSetGameModel()
     
     var cardsOnTable: Array<DOWSetGameModel.Card>{
         model.cardsOnTable
@@ -39,7 +35,7 @@ class ViewModel: ObservableObject{
         model.choose(card)
     }
     func restart(){
-        model = ViewModel.createNewSetGame()
+        model = DOWSetGameModel()
     }
     func changeFaceUp(_ card: Card){
         model.faceUpCard(card)

@@ -78,9 +78,9 @@ struct ContentView: View {
                 for card in viewModel.cardsOnTable{
                     withAnimation(dealAnimation(for: card)){
                         deal(card)
-                        if viewModel.gameStart{
-                            viewModel.changeFaceUp(card)
-                        }
+                }
+                if viewModel.gameStart{
+                    viewModel.changeFaceUp(card)
                 }
             }
         }
@@ -97,6 +97,7 @@ struct ContentView: View {
                         .matchedGeometryEffect(id: card.id, in: dealingNamespace)
                         .onTapGesture{
                             viewModel.choose(card: card)
+                            print(card)
                         }
                 }
             }
@@ -106,7 +107,11 @@ struct ContentView: View {
     private func dealAnimation(for card: ViewModel.Card) -> Animation{
         var delay = 0.0
         if let index = viewModel.cardsOnTable.firstIndex(where: {$0.id == card.id}){
-            delay = Double(index) * CardConstants.totalDealDuration / Double(viewModel.cardsOnTable.count)
+            if !viewModel.gameStart{
+                delay = Double(index) * CardConstants.totalDealDuration / Double(viewModel.cardsOnTable.count)
+            } else {
+                delay = 0.3
+            }
         }
         return Animation.easeInOut(duration: CardConstants.dealDuration)
             .delay(delay)
@@ -136,10 +141,7 @@ private struct CardConstants{
 
 
 /* БАГИ И НЕРЕШЁННЫЕ ЗАДАЧИ:
-    - не выходит выбрать и убрать выбор с карты - она остаётся в памяти и
- происходит проверка на сет
-    - иногда попадаются одинаковые карты (???)
-    - сделать 3D переворот карт в начале игры - ???
+    - когда много карт, то перелистывание вверх или вниз вызывает баг анимации - ???
     - сделать проверку на окончание игры - есть ли ещё сеты на столе
     - сделать дрожание карт, если не совпали
  */

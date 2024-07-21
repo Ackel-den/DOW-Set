@@ -33,7 +33,7 @@ struct AspectVGrid<Item, ItemView>: View where ItemView: View, Item: Identifiabl
                 } else {
                     ScrollView{
                         LazyVGrid(columns: [GridItem(.adaptive(minimum: 60))]){
-                            ForEach(items){item in
+                            ForEach(items, id: \.id){item in
                                 content(item).aspectRatio(aspectRatio, contentMode: .fit)
                             }
                         }

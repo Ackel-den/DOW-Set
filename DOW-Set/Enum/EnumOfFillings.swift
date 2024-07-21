@@ -7,10 +7,8 @@
 
 import Foundation
 
-enum Filling{
+enum Filling: CaseIterable{
     case paintedOver
     case translucent
     case empty
-    
-    static let allValues: [Filling] = [.empty, .paintedOver, .translucent]
-}
+    }

@@ -14,22 +14,19 @@ protocol TheDeckBuilderProtocol{
 }
 
 class TheDeckBuilder: TheDeckBuilderProtocol{
-    var theDeck = [DOWSetGameModel.Card]()
-    var colors: [Color] = [.green, .red, .purple]
-    
     func makeDeck() -> Array<DOWSetGameModel.Card>{
-        for c in colors {
-            for f in Filling.allValues{
-                for s in Shapes.allValue{
+        var theDeck = [DOWSetGameModel.Card]()
+        let colors: [Color] = [.green, .red, .purple]
+        for color in colors {
+            for filling in Filling.allCases{
+                for shape in Shapes.allCases{
                     for n in 1...3{
-                        theDeck.append(DOWSetGameModel.Card(content: s, numberOfShapes: n, color: c, filling: f, id: (theDeck.count + 1)))
+                        theDeck.append(DOWSetGameModel.Card(content: shape, numberOfShapes: n, color: color, filling: filling, id: (theDeck.count + 1)))
                     }
                 }
             }
         }
-        
         return theDeck
     }
-    
 }
 
